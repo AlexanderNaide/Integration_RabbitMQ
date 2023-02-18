@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.console.producer;
+package ru.gb.rabbit_mq.console.producers;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
@@ -15,7 +15,7 @@ public class SerializationSenderApp {
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT, false, true, null);
-            channel.basicPublish(EXCHANGE_NAME, "", null, SerializationUtils.serialize(new MyMessage("Hello!")));
+            channel.basicPublish(EXCHANGE_NAME, "", null, SerializationUtils.serialize(new MyMessage("Hello!"))); //закидывание объекта (сериализация)
             System.out.println(" [x] Sent");
         }
     }

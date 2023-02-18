@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.console.consumer;
+package ru.gb.rabbit_mq.console.consumers;
 
 import com.rabbitmq.client.*;
 

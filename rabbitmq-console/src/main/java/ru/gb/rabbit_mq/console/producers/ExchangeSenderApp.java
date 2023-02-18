@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.console.producer;
+package ru.gb.rabbit_mq.console.producers;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;

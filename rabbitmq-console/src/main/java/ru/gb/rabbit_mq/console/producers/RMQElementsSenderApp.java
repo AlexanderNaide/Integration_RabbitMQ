@@ -1,6 +1,8 @@
-package com.flamexander.rabbitmq.console.producer;
+package ru.gb.rabbit_mq.console.producers;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 public class RMQElementsSenderApp {
     public static void main(String[] argv) throws Exception {

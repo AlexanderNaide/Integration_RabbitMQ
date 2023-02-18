@@ -1,8 +1,8 @@
-package com.flamexander.rabbitmq.console.consumer;
+package ru.gb.rabbit_mq.console.consumers;
 
-import com.flamexander.rabbitmq.console.producer.MyMessage;
 import com.rabbitmq.client.*;
 import org.apache.commons.lang3.SerializationUtils;
+import ru.gb.rabbit_mq.console.producers.MyMessage;
 
 public class SerializationReceiverApp {
     private static final String EXCHANGE_NAME = "example-ser";
@@ -21,7 +21,7 @@ public class SerializationReceiverApp {
         System.out.println(" [*] Waiting for messages");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            MyMessage mm = SerializationUtils.deserialize(delivery.getBody());
+            MyMessage mm = SerializationUtils.deserialize(delivery.getBody()); //это как десериaлизировать Объекты Java
             System.out.println(" [x] Received '" + mm.getMsg() + "'");
         };
 

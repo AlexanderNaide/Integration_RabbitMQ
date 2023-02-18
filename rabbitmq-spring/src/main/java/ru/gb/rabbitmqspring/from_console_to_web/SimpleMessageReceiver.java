@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.spring.from_console_to_web;
+package ru.gb.rabbitmqspring.from_console_to_web;
 
 import org.springframework.stereotype.Component;
 

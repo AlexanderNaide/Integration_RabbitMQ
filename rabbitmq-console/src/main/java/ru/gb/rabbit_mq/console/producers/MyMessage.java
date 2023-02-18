@@ -1,11 +1,13 @@
-package com.flamexander.rabbitmq.console.producer;
+package ru.gb.rabbit_mq.console.producers;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class MyMessage implements Serializable {
+    @Serial
     private static final long serialVersionUID = -1650136059587331366L;
 
-    private String msg;
+    private final String msg;
 
     public String getMsg() {
         return msg;

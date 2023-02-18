@@ -1,6 +1,9 @@
-package com.flamexander.rabbitmq.console.consumer;
+package ru.gb.rabbit_mq.console.consumers;
 
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 
 public class RMQElementsReceiverApp {
     public static void main(String[] argv) throws Exception {

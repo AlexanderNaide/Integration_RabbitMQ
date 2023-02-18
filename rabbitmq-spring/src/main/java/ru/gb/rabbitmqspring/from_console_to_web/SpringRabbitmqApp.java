@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.spring.from_console_to_web;
+package ru.gb.rabbitmqspring.from_console_to_web;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,6 +20,8 @@ public class SpringRabbitmqApp {
 
     private RabbitTemplate rabbitTemplate;
 
+    // Отправка:
+
     @Autowired
     public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
@@ -36,6 +38,8 @@ public class SpringRabbitmqApp {
         return "OK";
     }
 
+    // Получение:
+
     @Bean
     public SimpleMessageListenerContainer containerForTopic(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
@@ -46,27 +50,11 @@ public class SpringRabbitmqApp {
     }
 
     @Bean
-    public MessageListenerAdapter listenerAdapter(SimpleMessageReceiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
+    public MessageListenerAdapter listenerAdapter(SimpleMessageReceiver receiver) { // тот самый Калбэк "обработчик сообщений"
+        return new MessageListenerAdapter(receiver, "receiveMessage"); // указали какой компонент и какой в нем метод использовать
     }
 
     public static void main(String[] args) {
         SpringApplication.run(SpringRabbitmqApp.class, args);
     }
-
-    // Домашнее задание:
-    // 1. Сделайте два консольных приложения (не Спринг):
-    //
-    //   а. IT-блог, который публикует статьи по языкам программирования
-    //   б. Подписчик, которого интересуют статьи по определенным языкам
-    //
-    //   Детали a. Если IT-блог в консоли пишет 'php some message', то 'some message'
-    //   отправляется в RabbitMQ с темой 'php', и это сообщение получают подписчики
-    //   этой темы
-    //
-    //   Детали b. Подписчик при запуске должен ввести команду 'set_topic php', после
-    //   чего начнет получать сообщения из очереди с соответствующей темой 'php'
-    //
-    // 2. * Сделайте возможность клиентов подписываться и отписываться от статей по темам
-    // в процессе работы приложения-подписчика
 }

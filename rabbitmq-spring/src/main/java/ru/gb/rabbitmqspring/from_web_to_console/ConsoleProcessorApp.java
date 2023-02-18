@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.spring.from_web_to_console;
+package ru.gb.rabbitmqspring.from_web_to_console;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

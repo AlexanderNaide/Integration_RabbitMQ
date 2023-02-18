@@ -1,4 +1,4 @@
-package com.flamexander.rabbitmq.console.consumer;
+package ru.gb.rabbit_mq.console.consumers;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -19,22 +19,22 @@ public class TaskReceiverApp {
         channel.queueBind(TASK_QUEUE_NAME, TASK_EXCHANGER, "");
         System.out.println(" [*] Waiting for messages");
 
-        channel.basicQos(3);
+        channel.basicQos(2); // параметр, который устанавливает по сколько задач receiver может автоматически забирать из очереди,
+        // иначе по умолчанию заберет много (10)
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
 
             System.out.println(" [x] Received '" + message + "'");
-//            if (1 < 10) {
-//                throw new RuntimeException("Oops");
-//            }
             doWork(message);
             System.out.println(" [x] Done");
 
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false); // такой командой происходит подтверждение успешной обработки сообщения
         };
 
         channel.basicConsume(TASK_QUEUE_NAME, false, deliverCallback, consumerTag -> {
+            // если второй аргумент false - ждем подтверждения успешного выполнения задачи
+            // если true - задача, которую забрали из очереди, автоматически удаляется без подтверждения
         });
     }
 

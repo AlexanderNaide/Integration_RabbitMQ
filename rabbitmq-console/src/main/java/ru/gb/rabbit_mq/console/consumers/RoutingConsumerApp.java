@@ -1,6 +1,8 @@
-package com.flamexander.rabbitmq.console.consumer;
+package ru.gb.rabbit_mq.console.consumers;
 
 import com.rabbitmq.client.*;
+
+import java.nio.charset.StandardCharsets;
 
 public class RoutingConsumerApp {
     private static final String EXCHANGE_NAME = "topic_exchange";
@@ -16,12 +18,14 @@ public class RoutingConsumerApp {
         String queueName = channel.queueDeclare().getQueue();
         System.out.println("QUEUE NAME: " + queueName);
 
-        String routingKey = "prog.*.oop";
+        String routingKey = "prog.*.oop"; // как ветвить задания по routingKey: * - любое слово, # - любое количество символов(слов)
+//        String routingKey = "prog.#";
+//        String routingKey = "#.oop";
         channel.queueBind(queueName, EXCHANGE_NAME, routingKey);
         System.out.println(" [*] Waiting for messages with routing key (" + routingKey + "):");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), "UTF-8");
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
 
         };
