@@ -1,5 +1,6 @@
 package ru.gb.rabbitmqspring.from_console_to_web;
 
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -27,10 +28,10 @@ public class SpringRabbitmqApp {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-//    @Bean
-//    public Queue resultsQueue() {
-//        return new Queue(QUEUE_WITH_PROCESSING_TASK_RESULTS, true, false, false);
-//    }
+    @Bean
+    public Queue resultsQueue() {
+        return new Queue(QUEUE_WITH_PROCESSING_TASK_RESULTS, true, false, false);
+    }
 
     @GetMapping("/{message}")
     public String sendMessage(@PathVariable String message) {
