@@ -21,7 +21,7 @@ public class SpringRabbitmqApp {
 
     @GetMapping("/{message}")
     public String sendMessage(@PathVariable String message) {
-        rabbitTemplate.convertAndSend("webToConsoleExchanger", null, "Task from Server: " + message);
+        rabbitTemplate.convertAndSend("webToConsoleExchanger", "java", "Task from Server: " + message);
         return "OK";
     }
 

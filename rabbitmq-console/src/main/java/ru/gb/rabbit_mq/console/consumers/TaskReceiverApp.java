@@ -15,8 +15,8 @@ public class TaskReceiverApp {
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
-        channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
-        channel.queueBind(TASK_QUEUE_NAME, TASK_EXCHANGER, "");
+        channel.queueDeclare(TASK_QUEUE_NAME, false, false, false, null);
+        channel.queueBind(TASK_QUEUE_NAME, TASK_EXCHANGER, "java");
         System.out.println(" [*] Waiting for messages");
 
         channel.basicQos(2); // параметр, который устанавливает по сколько задач receiver может автоматически забирать из очереди,
